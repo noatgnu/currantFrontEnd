@@ -25,6 +25,8 @@ export class DifferentialAnalysisComponent {
     removeContaminants: [true, Validators.required],
   })
 
+  outputFiles: any[] = []
+
   sampleMap: any = {}
   wsSub: Subscription = new Subscription()
   conditions: string[] = []
@@ -40,6 +42,7 @@ export class DifferentialAnalysisComponent {
     private ws: WebsocketService
   ) {
     this.form.controls["sampleColumns"].valueChanges.subscribe((data) => {
+      console.log(data)
       this.updateConditions(data)
     })
   }
@@ -49,7 +52,7 @@ export class DifferentialAnalysisComponent {
       const target = event.target as HTMLInputElement;
       if (target.files) {
         this.selectedFileName = target.files[0].name
-        this.web.post("http://localhost:8000/api/file/", target.files[0]).then((res: any) => {
+        this.web.post("http://10.201.84.175:8000/api/file/", target.files[0]).then((res: any) => {
           if (res) {
             this.columns = res.columns
             this.sessionID = res.link_id
@@ -78,12 +81,15 @@ export class DifferentialAnalysisComponent {
       sampleMap[a] = {condition, replicate}
     })
     this.sampleMap = sampleMap
-    this.updateSummary(undefined)
+    this.updateSummary(undefined, data)
   }
 
-  updateSummary(event: any) {
+  updateSummary(event: any, sampleData: string[] = []) {
     const countMap: any = {}
-    for (const c of this.form.value.sampleColumns) {
+    if (sampleData.length === 0) {
+      sampleData = this.form.value.sampleColumns
+    }
+    for (const c of sampleData) {
       if (!countMap[this.sampleMap[c].condition]) {
         countMap[this.sampleMap[c].condition] = 0
       }
@@ -102,8 +108,19 @@ export class DifferentialAnalysisComponent {
       inputFiles: [this.sessionID],
       form: f
     }
-    this.web.postParameters("http://localhost:8000/api/operation/", body).then((res: any) => {
+    this.web.postParameters("http://10.201.84.175:8000/api/operation/", body).then((res: any) => {
+      this.outputFiles = res.output_files
       console.log(res)
     })
+  }
+
+  downloadFile(file: any) {
+    const a = document.createElement("a")
+    a.setAttribute("href", file.file)
+    a.setAttribute("download", file.file_type + ".txt")
+    a.setAttribute("target", "_blank")
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
   }
 }

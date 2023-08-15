@@ -17,6 +17,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './home/home.component';
 import { DifferentialAnalysisComponent } from './differential-analysis/differential-analysis.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MatSelectModule,
     ReactiveFormsModule,
     FormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
