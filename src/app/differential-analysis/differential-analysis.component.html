@@ -1,0 +1,151 @@
+<div style="display: flex; justify-content: center; margin-top: 20px;">
+  <mat-card style="min-width: 600px">
+    <mat-card-header>
+      <mat-card-title>
+        <span>Differential Analysis Parameters Input</span>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div style="display: flex; align-items: center">
+        <div style="margin: 2px;">
+          <button mat-raised-button color="primary" (click)="fileUpload.click()">
+            <mat-icon>upload_file</mat-icon>
+            Upload Raw File
+          </button>
+          <small style="margin-left: 10px">Supported file types: .csv, .tsv, .txt</small>
+          <input accept=".csv,.tsv,.txt" hidden type="file" #fileUpload (change)="onFileSelected($event)" placeholder="Upload file">
+        </div>
+
+      </div>
+      <div style="margin: 2px;" *ngIf="selectedFileName">
+        Selected file: {{selectedFileName}}
+      </div>
+      <form [formGroup]="form" style="margin-top: 20px" *ngIf="columns.length > 0">
+        <div style="display:flex">
+          <div style="margin: 2px">
+            <mat-checkbox formControlName="log2">Log2 transform</mat-checkbox>
+          </div>
+          <div style="margin: 2px">
+            <mat-checkbox formControlName="removeContaminants">Remove contaminants</mat-checkbox>
+          </div>
+        </div>
+        <div style="display: flex">
+          <div style="margin: 2px">
+            <mat-form-field>
+              <mat-label>Imputation method</mat-label>
+              <mat-select formControlName="imputation">
+                <mat-option [value]="null">None</mat-option>
+                <mat-option *ngFor="let i of imputation" [value]="i">
+                  {{i}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div style="margin: 2px">
+            <mat-form-field>
+              <mat-label>Normalization method</mat-label>
+              <mat-select formControlName="normalization">
+                <mat-option [value]="null">None</mat-option>
+                <mat-option *ngFor="let i of normalization" [value]="i">
+                  {{i}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div style="margin: 2px">
+            <mat-form-field>
+              <mat-label>Data completeness</mat-label>
+              <input matInput formControlName="dataCompleteness" min="0" max="1" type="number">
+            </mat-form-field>
+          </div>
+        </div>
+
+      </form>
+      <div style="display: flex;" *ngIf="columns.length > 0">
+        <form [formGroup]="form">
+          <div>
+            <mat-form-field style="width: 300px">
+              <mat-label>Select index column</mat-label>
+              <mat-select formControlName="indexColumn">
+                <mat-option *ngFor="let i of columns" [value]="i">
+                  {{i}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field style="width: 300px">
+              <mat-label>Select sample columns</mat-label>
+              <mat-select multiple formControlName="sampleColumns">
+                <mat-option *ngFor="let i of columns" [value]="i">
+                  {{i}}
+                </mat-option>
+              </mat-select>
+              <mat-hint>Selected {{form.value['sampleColumns'].length}} samples</mat-hint>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field style="width: 300px">
+              <mat-label>Select comparison condition A</mat-label>
+              <mat-select formControlName="conditionA">
+                <mat-option *ngFor="let i of conditions" [value]="i">
+                  {{i}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field style="width: 300px">
+              <mat-label>Select comparison condition B</mat-label>
+              <mat-select formControlName="conditionB">
+                <mat-option *ngFor="let i of conditions" [value]="i">
+                  {{i}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field style="width: 300px">
+              <mat-label>Test methods</mat-label>
+              <mat-select formControlName="diffTest">
+                <mat-option *ngFor="let i of diffTest" [value]="i">
+                  {{i}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+        </form>
+        <div style="margin-left: 20px" *ngIf="conditions.length > 0">
+          <ul>
+            Selected conditions:
+            <li *ngFor="let c of conditions">
+              {{c}}: {{countMap[c]}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="submit()" [disabled]="!form.valid">Submit</button>
+    </mat-card-actions>
+  </mat-card>
+
+  <mat-card *ngIf="form.value['sampleColumns'].length > 0" style="margin-left: 20px">
+    <mat-card-header>
+      <mat-card-title>
+        <span>Sample & Condition assignments</span>
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content [style.overflow]="'auto'" [style.height.px]="'600'">
+      <div style="display: flex; justify-content: center" *ngFor="let s of form.value['sampleColumns']">
+        <div style="margin: 2px">
+          <mat-form-field>
+            <mat-label>Condition for {{s}}</mat-label>
+            <input matInput (change)="updateSummary($event)" [(ngModel)]="sampleMap[s].condition" type="text">
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
