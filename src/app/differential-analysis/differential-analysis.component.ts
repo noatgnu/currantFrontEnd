@@ -33,7 +33,7 @@ export class DifferentialAnalysisComponent {
   normalization: string[] = ["zscore", "quantile", "linear", "vst"]
   imputation: string[] = ["mean", "median", "knn", "randomforest"]
   diffTest: string[] = ["wald", "ttest", "welch-ttest", "sam", "paired-ttest"]
-  wsURL: string = "ws://localhost:8000/session/"
+  wsURL: string = "ws://10.201.84.175:8000/session/"
 
   sessionID: string = ""
   constructor(
