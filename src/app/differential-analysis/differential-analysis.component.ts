@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {WebService} from "../web.service";
 import {WebsocketService} from "../websocket.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-differential-analysis',
@@ -33,17 +34,23 @@ export class DifferentialAnalysisComponent {
   normalization: string[] = ["zscore", "quantile", "linear", "vst"]
   imputation: string[] = ["mean", "median", "knn", "randomforest"]
   diffTest: string[] = ["wald", "ttest", "welch-ttest", "sam", "paired-ttest"]
-  wsURL: string = "ws://10.201.84.175:8000/session/"
+  wsURL: string = "ws://10.201.84.175:8000/ws/operation/1/2/"
 
   sessionID: string = ""
   constructor(
     private web: WebService,
     private fb: FormBuilder,
-    private ws: WebsocketService
+    private ws: WebsocketService,
+    private sb: MatSnackBar
   ) {
     this.form.controls["sampleColumns"].valueChanges.subscribe((data) => {
       console.log(data)
       this.updateConditions(data)
+    })
+
+    this.ws.connect(this.wsURL).asObservable().subscribe((msg: any) => {
+      this.sb.open(msg.message, "Close", {duration: 5000})
+      console.log(msg)
     })
   }
   countMap: any = {}
@@ -124,3 +131,4 @@ export class DifferentialAnalysisComponent {
     a.remove()
   }
 }
+//

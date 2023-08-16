@@ -158,14 +158,14 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <mat-grid-list cols="2" rowHeight="400px">
+      <mat-grid-list [cols]="outputFiles.length" rowHeight="100px">
         <mat-grid-tile *ngFor="let f of outputFiles">
           <div>
             <div>
               <b>{{f.file_type}}</b>
             </div>
             <div>
-              <button mat-raised-button color="primary" (click)="downloadFile(f)">Download</button>
+              <button [method]="'GET'" [fileName]="f.file_type+'.txt'" [url]="f.file" fileSaver mat-raised-button color="primary">Download</button>
             </div>
           </div>
         </mat-grid-tile>

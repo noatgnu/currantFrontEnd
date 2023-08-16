@@ -18,6 +18,8 @@ import { HomeComponent } from './home/home.component';
 import { DifferentialAnalysisComponent } from './differential-analysis/differential-analysis.component';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatGridListModule} from "@angular/material/grid-list";
+import {FileSaverDirective} from "ngx-filesaver";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -46,9 +48,10 @@ import {MatGridListModule} from "@angular/material/grid-list";
     ReactiveFormsModule,
     FormsModule,
     MatCheckboxModule,
-    MatGridListModule
+    MatGridListModule,
+    FileSaverDirective
   ],
-  providers: [],
+  providers: [MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
