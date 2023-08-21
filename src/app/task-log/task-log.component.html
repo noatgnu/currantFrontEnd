@@ -1,0 +1,25 @@
+<mat-card style="margin: 20px; max-width: 300px">
+  <mat-card-header>
+    <mat-card-title>Task logs</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div style="display: flex; flex-direction: column-reverse; overflow-y: auto; height: 500px">
+      <p *ngFor="let m of ws.messages">
+        <b>{{m.requestType}}</b><br>
+        {{m.message}}<br>
+        <small>{{m.time | date:'medium'}}</small>
+      </p>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card style="margin: 20px; max-width: 300px">
+  <mat-card-header>
+    <mat-card-title>Tasks</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <p *ngFor="let t of task.tasks">
+      {{t.operation}}: {{t.status}}
+    </p>
+  </mat-card-content>
+</mat-card>

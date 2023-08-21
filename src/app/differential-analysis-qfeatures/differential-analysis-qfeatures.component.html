@@ -2,7 +2,7 @@
   <mat-card style="flex-grow:3">
     <mat-card-header>
       <mat-card-title>
-        <span>AlphaPeptStats Differential Analysis Parameters Input</span>
+        <span>QFeatures Differential Analysis Parameters Input</span>
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
@@ -37,8 +37,17 @@
           <div style="margin: 2px">
             <mat-checkbox formControlName="log2">Log2 transform</mat-checkbox>
           </div>
+        </div>
+        <div style="display: flex">
           <div style="margin: 2px">
-            <mat-checkbox formControlName="removeContaminants">Remove contaminants</mat-checkbox>
+            <mat-form-field>
+              <mat-label>Operation type</mat-label>
+              <mat-select formControlName="operationType">
+                <mat-option *ngFor="let i of operationTypeChoices" [value]="i">
+                  {{i}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
           </div>
         </div>
         <div style="display: flex">

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import {WebSocketSubject} from "rxjs/internal/observable/dom/WebSocketSubject";
+import * as readableuids from "uuid-readable";
+import {webSocket} from "rxjs/webSocket";
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +9,30 @@ import {WebSocketSubject} from "rxjs/internal/observable/dom/WebSocketSubject";
 export class WebsocketService {
   connection: WebSocketSubject<any>|undefined
   connecting: boolean = false
-
+  messages: any[] = []
+  sessionID: string = readableuids.short(crypto.randomUUID()).replace(/\s/g, "")
+  eventStreamConnected: boolean = false
   constructor() { }
 
   connect(url: string) {
     this.connecting = true
     if (!this.connection) {
-      this.connection = new WebSocketSubject(url)
+      // @ts-ignore
+      this.connection = new webSocket({
+        url: url,
+        openObserver: {
+          next: () => {
+            console.log("connected to " + url)
+            this.eventStreamConnected = true
+          }
+        },
+        closeObserver: {
+          next: () => {
+            console.log("closed connection to " + url)
+            this.eventStreamConnected = false
+          }
+        }
+      })
       this.connecting = false
       return this.connection
     } else {

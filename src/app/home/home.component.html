@@ -1,1 +1,29 @@
-<app-differential-analysis></app-differential-analysis>
+<div style="display: flex; justify-content: center; flex-wrap: wrap">
+  <div class="card-block">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Differential Analysis (AlphaPeptStats Generic)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        A Differential analysis workflow that requires a single input data set with a minimum of two conditions. The workflow utilize the AlphaPeptStats Python package with Generic loader.
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/differential-analysis-alpha">Start</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="card-block">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Differential Analysis (QFeatures)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        A Differential analysis workflow that requires a single input data set with a minimum of two conditions. The workflow utilize the QFeatures R package.
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/differential-analysis-qfeatures">Start</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

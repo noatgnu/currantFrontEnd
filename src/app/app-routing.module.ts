@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {HomeComponent} from "./home/home.component";
+import {DifferentialAnalysisComponent} from "./differential-analysis/differential-analysis.component";
 
 const routes: Routes = [
 
@@ -16,6 +17,8 @@ const routes: Routes = [
     ],
 
   },
+  {path: "differential-analysis-alpha", component: DifferentialAnalysisComponent},
+  {path: "differential-analysis-qfeatures", component: DifferentialAnalysisComponent},
   {path: ':settings', component: HomeComponent},
   {path: "**", redirectTo:"home"}
 ];

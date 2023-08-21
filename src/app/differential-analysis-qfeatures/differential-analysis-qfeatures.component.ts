@@ -6,28 +6,30 @@ import {WebsocketService} from "../websocket.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TaskService} from "../task.service";
 import {Task} from "../class/task";
+import {Coral} from "../class/coral";
 import {CoralService} from "../coral.service";
 
 @Component({
-  selector: 'app-differential-analysis',
-  templateUrl: './differential-analysis.component.html',
-  styleUrls: ['./differential-analysis.component.sass']
+  selector: 'app-differential-analysis-qfeatures',
+  templateUrl: './differential-analysis-qfeatures.component.html',
+  styleUrls: ['./differential-analysis-qfeatures.component.sass']
 })
-export class DifferentialAnalysisComponent {
+export class DifferentialAnalysisQfeaturesComponent {
   @Output() operation: EventEmitter<any> = new EventEmitter<any>()
   columns: string[] = []
   selectedFileName: string = ""
+  operationTypeChoices: string[] = ["RQF-PROT", "RQF-PEP"]
   form: FormGroup = this.fb.group({
-    normalization: ["quantile",],
+    normalization: ["quantiles.robust",],
     imputation: ["knn",],
-    dataCompleteness: [0, Validators.required],
+    dataCompleteness: [1, Validators.required],
     sampleColumns: [[], Validators.required],
     indexColumn: [null, Validators.required],
-    diffTest: ["welch-ttest", Validators.required],
+    diffTest: ["limma", Validators.required],
     conditionA: [null, Validators.required],
     conditionB: [null, Validators.required],
     log2: [true, Validators.required],
-    removeContaminants: [true, Validators.required],
+    operationType: ["RQF-PROT", Validators.required],
   })
 
   outputFiles: any[] = []
@@ -35,9 +37,9 @@ export class DifferentialAnalysisComponent {
   sampleMap: any = {}
   wsSub: Subscription = new Subscription()
   conditions: string[] = []
-  normalization: string[] = ["zscore", "quantile", "linear", "vst"]
-  imputation: string[] = ["mean", "median", "knn", "randomforest"]
-  diffTest: string[] = ["wald", "ttest", "welch-ttest", "sam", "paired-ttest"]
+  normalization: string[] = ["sum", "max", "center.mean", "center.median", "div.mean", "div.median", "diff.meda", "quantiles", "quantiles.robust", "vsn"]
+  imputation: string[] = ["neighbour_average", "knn", "mle", "mle2", "bpca", "mixed", "min", "MinDet", "MinProb", "QRILC", "zero", "RF"]
+  diffTest: string[] = ["limma"]
   wsURL: string = "ws://10.201.84.175:8000/ws/operation/1/2/"
 
   sessionID: string = ""
@@ -45,8 +47,10 @@ export class DifferentialAnalysisComponent {
     private web: WebService,
     private fb: FormBuilder,
     private ws: WebsocketService,
+    private sb: MatSnackBar,
     private task: TaskService,
-    public coral: CoralService) {
+    public coral: CoralService
+  ) {
     this.form.controls["sampleColumns"].valueChanges.subscribe((data) => {
       console.log(data)
       this.updateConditions(data)
@@ -116,7 +120,7 @@ export class DifferentialAnalysisComponent {
     const body: any = {
       inputFiles: [this.sessionID],
       form: f,
-      operationType: "APS-DF",
+      operationType: this.form.value.operationType,
       sessionId: this.ws.sessionID,
     }
     const task: Task = new Task(0, body["operationType"], "Created")
@@ -132,7 +136,6 @@ export class DifferentialAnalysisComponent {
       task.value = res
       this.task.taskMap[res.id.toString()] = task
       this.coral.coral.addOperation(res)
-      this.operation.emit(res)
     })
   }
 
@@ -152,4 +155,3 @@ export class DifferentialAnalysisComponent {
     this.selectedFileName = e.file_type + e.link_id
   }
 }
-//

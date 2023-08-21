@@ -20,37 +20,45 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {FileSaverDirective} from "ngx-filesaver";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import { TaskLogComponent } from './task-log/task-log.component';
+import { DifferentialAnalysisQfeaturesComponent } from './differential-analysis-qfeatures/differential-analysis-qfeatures.component';
+import {MatMenuModule} from "@angular/material/menu";
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DifferentialAnalysisComponent
+    DifferentialAnalysisComponent,
+    TaskLogComponent,
+    DifferentialAnalysisQfeaturesComponent,
+    SettingsComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {
-      enabled: !isDevMode(),
-      // Register the ServiceWorker as soon as the application is stable
-      // or after 30 seconds (whichever comes first).
-      registrationStrategy: 'registerWhenStable:30000'
-    }),
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    HttpClientModule,
-    MatSelectModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatCheckboxModule,
-    MatGridListModule,
-    FileSaverDirective
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: !isDevMode(),
+            // Register the ServiceWorker as soon as the application is stable
+            // or after 30 seconds (whichever comes first).
+            registrationStrategy: 'registerWhenStable:30000'
+        }),
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatCardModule,
+        HttpClientModule,
+        MatSelectModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatCheckboxModule,
+        MatGridListModule,
+        FileSaverDirective,
+        MatMenuModule
+    ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]
 })
