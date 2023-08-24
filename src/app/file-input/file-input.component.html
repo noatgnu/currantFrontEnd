@@ -1,0 +1,31 @@
+<div style="display: flex; align-items: center">
+    <div style="margin: 2px;">
+        <button mat-raised-button color="primary" (click)="fileUpload.click()">
+            <mat-icon>upload_file</mat-icon>
+            Upload Raw File
+        </button>
+        <small style="margin-left: 10px">Supported file types: .csv, .tsv, .txt</small>
+        <input accept=".csv,.tsv,.txt" hidden type="file" #fileUpload (change)="onFileSelected($event)" placeholder="Upload file">
+    </div>
+</div>
+<div style="margin: 2px">
+    <b>Or</b>
+</div>
+<div style="margin: 2px">
+    <form [formGroup]="fileSelectionForm">
+        <mat-form-field style="width: 500px">
+            <mat-label>Select From Uploaded Files</mat-label>
+            <mat-select formControlName="file">
+                <ng-container *ngFor="let f of coral.coral.files">
+                    <mat-option *ngIf="!f.file_type.includes('json')"  [value]="f">
+                        {{f.file_type.join("_")}}_({{f.link_id}})
+                    </mat-option>
+                </ng-container>
+            </mat-select>
+        </mat-form-field>
+    </form>
+
+</div>
+<div style="margin: 2px;" *ngIf="selectedFileName">
+    Selected file: {{selectedFileName}}
+</div>

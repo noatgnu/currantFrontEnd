@@ -5,6 +5,7 @@ import {WebsocketService} from "./websocket.service";
 import {Subscription} from "rxjs";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TaskService} from "./task.service";
+import {CoralService} from "./coral.service";
 
 @Component({
   selector: 'app-root',
@@ -14,8 +15,13 @@ import {TaskService} from "./task.service";
 export class AppComponent {
   title = 'Coral';
 
-  constructor(public ws: WebsocketService, private sb: MatSnackBar, private task: TaskService, private web: WebService) {
+  constructor(public ws: WebsocketService, private sb: MatSnackBar, private task: TaskService, private web: WebService, private coral: CoralService) {
     this.connectWebsocket()
+    this.task.newTaskStarted.asObservable().subscribe((data: boolean) => {
+      if (data && !this.ws.eventStreamConnected) {
+        this.connectWebsocket()
+      }
+    })
   }
 
   connectWebsocket() {
@@ -31,6 +37,16 @@ export class AppComponent {
         this.web.getOperation(id).then((res: any) => {
           this.task.taskMap[id].value = res
           this.task.taskMap[id].status = "Completed"
+          for (const f of res.output_files) {
+            this.coral.coral.addFile(f)
+          }
+
+          for (let i = 0; i < this.coral.coral.operations.length; i++) {
+            if (this.coral.coral.operations[i].id === id) {
+              this.coral.coral.operations[i] = res
+              break
+            }
+          }
           this.task.taskMap[id].statusSub.next("Completed")
         })
       }

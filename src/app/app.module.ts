@@ -24,6 +24,16 @@ import { TaskLogComponent } from './task-log/task-log.component';
 import { DifferentialAnalysisQfeaturesComponent } from './differential-analysis-qfeatures/differential-analysis-qfeatures.component';
 import {MatMenuModule} from "@angular/material/menu";
 import { SettingsComponent } from './settings/settings.component';
+import {NgOptimizedImage} from "@angular/common";
+import { ImputationQfeaturesComponent } from './imputation-qfeatures/imputation-qfeatures.component';
+import { NormalizationQfeaturesComponent } from './normalization-qfeatures/normalization-qfeatures.component';
+import {PlotlyModule} from "angular-plotly.js";
+import * as PlotlyJS from 'plotly.js-dist-min';
+import { SampleAndConditionAssignmentComponent } from './sample-and-condition-assignment/sample-and-condition-assignment.component';
+import { FileInputComponent } from './file-input/file-input.component';
+import { CorrelationMatrixRComponent } from './correlation-matrix-r/correlation-matrix-r.component';
+
+PlotlyModule.plotlyjs = PlotlyJS
 
 @NgModule({
   declarations: [
@@ -32,7 +42,12 @@ import { SettingsComponent } from './settings/settings.component';
     DifferentialAnalysisComponent,
     TaskLogComponent,
     DifferentialAnalysisQfeaturesComponent,
-    SettingsComponent
+    SettingsComponent,
+    ImputationQfeaturesComponent,
+    NormalizationQfeaturesComponent,
+    SampleAndConditionAssignmentComponent,
+    FileInputComponent,
+    CorrelationMatrixRComponent
   ],
     imports: [
         BrowserModule,
@@ -57,7 +72,9 @@ import { SettingsComponent } from './settings/settings.component';
         MatCheckboxModule,
         MatGridListModule,
         FileSaverDirective,
-        MatMenuModule
+        MatMenuModule,
+        NgOptimizedImage,
+        PlotlyModule
     ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]

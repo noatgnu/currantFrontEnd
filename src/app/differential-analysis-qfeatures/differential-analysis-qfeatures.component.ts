@@ -30,6 +30,7 @@ export class DifferentialAnalysisQfeaturesComponent {
     conditionB: [null, Validators.required],
     log2: [true, Validators.required],
     operationType: ["RQF-PROT", Validators.required],
+    aggregateColumn: [null,],
   })
 
   outputFiles: any[] = []
@@ -64,12 +65,12 @@ export class DifferentialAnalysisQfeaturesComponent {
       const target = event.target as HTMLInputElement;
       if (target.files) {
         this.selectedFileName = target.files[0].name
-        this.web.postFile(target.files[0]).then((res: any) => {
+        this.web.postFile(target.files[0], 'table').then((res: any) => {
           if (res) {
             this.columns = res.columns
             this.sessionID = res.link_id
             this.coral.coral.addFile(res)
-            this.selectedFileName = res.file_type + res.link_id
+            this.selectedFileName = res.file_type.join("_") + res.link_id
             /*this.ws.connect(this.wsURL + res.session_id + "/ws/")
             if (this.wsSub) {
               this.wsSub.unsubscribe()
@@ -152,6 +153,6 @@ export class DifferentialAnalysisQfeaturesComponent {
   changeFile(e: any) {
     this.columns = e.columns
     this.sessionID = e.link_id
-    this.selectedFileName = e.file_type + e.link_id
+    this.selectedFileName = e.file_type.join("_") + e.link_id
   }
 }

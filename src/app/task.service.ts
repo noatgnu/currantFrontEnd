@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Task} from "./class/task";
 import { TaskDictionary } from './interface/task-dictionary';
+import {Subject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -8,5 +9,6 @@ import { TaskDictionary } from './interface/task-dictionary';
 export class TaskService {
   tasks: Task[] = []
   taskMap: TaskDictionary = {}
+  newTaskStarted: Subject<boolean> = new Subject<boolean>()
   constructor() { }
 }

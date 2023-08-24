@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1692624403695,
+  "timestamp": 1692881465996,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,11 +13,11 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.f3b5d63187aabcf8.js",
+        "/main.2c5c966bcb3029f2.js",
         "/manifest.webmanifest",
         "/polyfills.8f472862329190cc.js",
         "/runtime.94b424226ea4dd39.js",
-        "/styles.c42eade6e6c1d450.css"
+        "/styles.1cd6144cc8181aa3.css"
       ],
       "patterns": []
     },
@@ -36,7 +36,9 @@
         "/assets/icons/icon-384x384.png",
         "/assets/icons/icon-512x512.png",
         "/assets/icons/icon-72x72.png",
-        "/assets/icons/icon-96x96.png"
+        "/assets/icons/icon-96x96.png",
+        "/assets/noatgnu_segment_of_coral_256x256.png",
+        "/assets/noatgnu_simple_logo_vector_graphic_of_segment_of_coral_180x180.png"
       ],
       "patterns": []
     }
@@ -51,13 +53,15 @@
     "/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
     "/assets/icons/icon-72x72.png": "279825a1ac4377032ae996a1832c641e33ccf1b6",
     "/assets/icons/icon-96x96.png": "592885efcbfee27e5e20be4fa3043589390d2740",
+    "/assets/noatgnu_segment_of_coral_256x256.png": "036a242ea69a1b4683a05ad872dcecc909535e47",
+    "/assets/noatgnu_simple_logo_vector_graphic_of_segment_of_coral_180x180.png": "93324048a95da56f8792b1ee7b46dcd208b0a985",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "319339dc724db60d9844d8e1e4a658b501207bb5",
-    "/main.f3b5d63187aabcf8.js": "c3e6591c3b647a1889dda161b2cc1d6ca66c4ff2",
+    "/index.html": "eea5827972d83223ededb828a07be5e08f90f258",
+    "/main.2c5c966bcb3029f2.js": "b6b83b6d576f7300db7173ac2c01a3b41e9315d7",
     "/manifest.webmanifest": "dff848d342dd4aa5a2628d6c60c4a8710aa0eaf8",
     "/polyfills.8f472862329190cc.js": "415de6314bd69a8084aac50811edb282fec7a19a",
     "/runtime.94b424226ea4dd39.js": "d16fb526148c8ba637698ac8ac8d29b1a32523df",
-    "/styles.c42eade6e6c1d450.css": "7b552f11f8527de203ea03e9011eedf34ac7dd0f"
+    "/styles.1cd6144cc8181aa3.css": "972067336b87ae3a28fb1ea016950c48cae72b70"
   },
   "navigationUrls": [
     {

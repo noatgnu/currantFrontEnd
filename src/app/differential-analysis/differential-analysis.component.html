@@ -1,4 +1,4 @@
-<div style="display: flex; justify-content: center; margin-top: 20px;">
+<div style="display: flex; align-items: flex-start; justify-content: center; align-content: stretch; margin-top: 20px">
   <mat-card style="flex-grow:3">
     <mat-card-header>
       <mat-card-title>
@@ -6,32 +6,7 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <div style="display: flex; align-items: center">
-        <div style="margin: 2px;">
-          <button mat-raised-button color="primary" (click)="fileUpload.click()">
-            <mat-icon>upload_file</mat-icon>
-            Upload Raw File
-          </button>
-          <small style="margin-left: 10px">Supported file types: .csv, .tsv, .txt</small>
-          <input accept=".csv,.tsv,.txt" hidden type="file" #fileUpload (change)="onFileSelected($event)" placeholder="Upload file">
-        </div>
-      </div>
-      <div style="margin: 2px">
-        <b>Or</b>
-      </div>
-      <div style="margin: 2px">
-        <mat-form-field style="width: 500px">
-          <mat-label>Select From Uploaded Files</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let f of coral.coral.files" [value]="f" (change)="changeFile($event)">
-              {{f.file_type}} ({{f.link_id}})
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div style="margin: 2px;" *ngIf="selectedFileName">
-        Selected file: {{selectedFileName}}
-      </div>
+      <app-file-input (columns)="columns = $event" (sessionID)="sessionID = $event"></app-file-input>
       <form [formGroup]="form" style="margin-top: 20px" *ngIf="columns.length > 0">
         <div style="display:flex">
           <div style="margin: 2px">
@@ -143,45 +118,33 @@
     </mat-card-actions>
   </mat-card>
 
-  <mat-card style="flex-grow: 1; margin-left: 20px">
-    <mat-card-header>
-      <mat-card-title>
-        <span>Sample & Condition assignments</span>
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content *ngIf="form.value['sampleColumns'].length > 0" [style.overflow]="'auto'" [style.height.px]="'600'">
-      <div style="display: flex; justify-content: center" *ngFor="let s of form.value['sampleColumns']">
-        <div style="margin: 2px">
-          <mat-form-field>
-            <mat-label>Condition for {{s}}</mat-label>
-            <input matInput (change)="updateSummary($event)" [(ngModel)]="sampleMap[s].condition" type="text">
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
+  <app-sample-and-condition-assignment
+          [samples]="form.value['sampleColumns']"
+          [sampleMap]="sampleMap" (sampleMapChange)="updateSummary($event)">
+  </app-sample-and-condition-assignment>
+  <div style="margin-top: 20px; display: flex; justify-content: center" *ngIf="outputFiles.length > 0">
+    <mat-card style="min-width: 600px">
+      <mat-card-header>
+        <mat-card-title>
+          Result
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-grid-list [cols]="outputFiles.length" rowHeight="100px">
+          <mat-grid-tile *ngFor="let f of outputFiles">
+            <div>
+              <div>
+                <b>{{f.file_type.join('_')}}</b>
+              </div>
+              <div>
+                <button [method]="'GET'" [fileName]="f.file_type.join('_')+'.txt'" [url]="f.file" fileSaver mat-raised-button color="primary">Download</button>
+              </div>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 
-<div style="margin-top: 20px; display: flex; justify-content: center" *ngIf="outputFiles.length > 0">
-  <mat-card style="min-width: 600px">
-    <mat-card-header>
-      <mat-card-title>
-        Result
-      </mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-grid-list [cols]="outputFiles.length" rowHeight="100px">
-        <mat-grid-tile *ngFor="let f of outputFiles">
-          <div>
-            <div>
-              <b>{{f.file_type}}</b>
-            </div>
-            <div>
-              <button [method]="'GET'" [fileName]="f.file_type+'.txt'" [url]="f.file" fileSaver mat-raised-button color="primary">Download</button>
-            </div>
-          </div>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </mat-card-content>
-  </mat-card>
-</div>
+

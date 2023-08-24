@@ -11,19 +11,29 @@ export class WebService {
   baseUrl = "http://" + this.host
   constructor(private http: HttpClient, private task: TaskService) { }
 
-  async postFile(body: File) {
+  async postFile(body: File, fileType: string = "text") {
     const formData = new FormData();
     formData.append('file', body);
+    formData.append('fileType', fileType);
+    this.task.newTaskStarted.next(true)
     return this.http.post(`${this.baseUrl}/api/file/`, formData, {reportProgress: true}).toPromise()
   }
 
   async postParameters( body: any) {
-
+    this.task.newTaskStarted.next(true)
     return this.http.post(`${this.baseUrl}/api/operation/`, body).toPromise()
   }
 
 
   async getOperation(id: number) {
     return this.http.get(`${this.baseUrl}/api/operation/${id}/`).toPromise()
+  }
+
+  async saveSession(body: any) {
+    return this.http.post(`${this.baseUrl}/api/session/`, body).toPromise()
+  }
+
+  async downloadText(url: string) {
+    return this.http.get(url, {responseType: 'text'}).toPromise()
   }
 }

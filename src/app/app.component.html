@@ -1,5 +1,11 @@
 <mat-toolbar color="primary">
-  <span>Coral</span>
+  <div class="image-cropper">
+    <a routerLink="home">
+      <img src="assets/noatgnu_simple_logo_vector_graphic_of_segment_of_coral_180x180.png" class="coral-logo" alt="coral-logo">
+    </a>
+  </div>
+
+  <span>CORAL</span>
   <span class="toolbar-spacer"></span>
   <div>
     <button mat-button *ngIf="!ws.eventStreamConnected" (click)="connectWebsocket()">
@@ -20,8 +26,8 @@
 
 </mat-toolbar>
 
-<div style="display: flex; height: 100%; justify-content: space-between">
-  <div>
+<div style="display: flex; height: 100%; justify-content: space-between; align-content: stretch">
+  <div style="flex-grow: 2">
     <router-outlet></router-outlet>
   </div>
   <div style="width: 300px">

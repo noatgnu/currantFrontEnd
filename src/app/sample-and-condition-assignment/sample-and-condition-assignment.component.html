@@ -1,0 +1,17 @@
+<mat-card style="min-width: 300px;margin-left: 20px">
+    <mat-card-header>
+        <mat-card-title>
+            <span>Sample & Condition assignments</span>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content [style.overflow]="'auto'" [style.height.px]="'600'">
+        <div style="display: flex; justify-content: center" *ngFor="let s of samples">
+            <div style="margin: 2px">
+                <mat-form-field>
+                    <mat-label>Condition for {{s}}</mat-label>
+                    <input matInput (change)="updateSampleMap($event)" [(ngModel)]="sampleMap[s].condition" type="text">
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

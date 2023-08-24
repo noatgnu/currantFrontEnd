@@ -25,5 +25,44 @@
       </mat-card-content>
     </mat-card>
   </div>
+  <div class="card-block">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Imputation (QFeatures)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        Data imputation to remove NA or blank data points from the datatable . The workflow utilize the QFeatures R package.
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/imputation-qfeatures">Start</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="card-block">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Normalization (QFeatures)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        Data normalization to allow differential analysis between data of different conditions. The workflow utilize the QFeatures R package.
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/normalization-qfeatures">Start</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="card-block">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Correlation Matrix (R)</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        Create correlation matrix plot using the corrplot package from R.
+        <mat-card-actions>
+          <button mat-raised-button color="primary" routerLink="/correlation-matrix-r">Start</button>
+        </mat-card-actions>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
 
