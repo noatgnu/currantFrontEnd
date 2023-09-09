@@ -7,7 +7,8 @@ import {TaskService} from "./task.service";
   providedIn: 'root'
 })
 export class WebService {
-  host = "10.201.84.175:8000"
+
+  host = "10.201.112.183:8000"
   baseUrl = "http://" + this.host
   constructor(private http: HttpClient, private task: TaskService) { }
 

@@ -97,33 +97,31 @@
             <button mat-raised-button color="primary" (click)="submit()" [disabled]="!form.valid">Submit</button>
         </mat-card-actions>
     </mat-card>
-
-    <div style="margin-top: 20px; display: flex; justify-content: center" *ngIf="outputFiles.length > 0">
-        <mat-card style="min-width: 600px">
-            <mat-card-header>
-                <mat-card-title>
-                    Result
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <mat-grid-list [cols]="outputFiles.length" rowHeight="100px">
-                    <mat-grid-tile *ngFor="let f of outputFiles">
-                        <div>
-                            <div>
-                                <b>{{f.file_type.join('_')}}</b>
-                            </div>
-                            <div *ngIf="f.file_type.include('table')">
-                                <button [method]="'GET'" [fileName]="f.file_type.join('_')+'.txt'" [url]="f.file" fileSaver mat-raised-button color="primary">Download</button>
-                            </div>
-                            <div *ngIf="f.file_type.include('pdf')">
-                                <button [method]="'GET'" [fileName]="f.file_type.join('_')+'.pdf'" [url]="f.file" fileSaver mat-raised-button color="primary">Download</button>
-                            </div>
-                        </div>
-                    </mat-grid-tile>
-                </mat-grid-list>
-            </mat-card-content>
-        </mat-card>
-    </div>
 </div>
-
+<div style="margin-top: 20px; display: flex; justify-content: center" *ngIf="outputFiles.length > 0">
+  <mat-card style="min-width: 600px">
+    <mat-card-header>
+      <mat-card-title>
+        Result
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-grid-list [cols]="outputFiles.length" rowHeight="100px">
+        <mat-grid-tile *ngFor="let f of outputFiles">
+          <div *ngIf="!f.file_type.includes('json')">
+            <div>
+              <b>{{f.file_type.join('_')}}</b>
+            </div>
+            <div *ngIf="f.file_type.includes('table')">
+              <button [method]="'GET'" [fileName]="f.file_type.join('_')+'.txt'" [url]="f.file" fileSaver mat-raised-button color="primary">Download</button>
+            </div>
+            <div *ngIf="f.file_type.includes('pdf')">
+              <button [method]="'GET'" [fileName]="f.file_type.join('_')+'.pdf'" [url]="f.file" fileSaver mat-raised-button color="primary">Download</button>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card-content>
+  </mat-card>
+</div>
 

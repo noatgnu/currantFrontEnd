@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1692881465996,
+  "timestamp": 1694257616851,
   "index": "/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "/favicon.ico",
         "/index.html",
-        "/main.2c5c966bcb3029f2.js",
+        "/main.f23d259394445f35.js",
         "/manifest.webmanifest",
         "/polyfills.8f472862329190cc.js",
         "/runtime.94b424226ea4dd39.js",
@@ -56,8 +56,8 @@
     "/assets/noatgnu_segment_of_coral_256x256.png": "036a242ea69a1b4683a05ad872dcecc909535e47",
     "/assets/noatgnu_simple_logo_vector_graphic_of_segment_of_coral_180x180.png": "93324048a95da56f8792b1ee7b46dcd208b0a985",
     "/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "/index.html": "eea5827972d83223ededb828a07be5e08f90f258",
-    "/main.2c5c966bcb3029f2.js": "b6b83b6d576f7300db7173ac2c01a3b41e9315d7",
+    "/index.html": "5499213cc99c9ffe0972d2b4e39fc3bc9f039a81",
+    "/main.f23d259394445f35.js": "5287dab8ef822062c041ac7e662a6ce7d9c36325",
     "/manifest.webmanifest": "dff848d342dd4aa5a2628d6c60c4a8710aa0eaf8",
     "/polyfills.8f472862329190cc.js": "415de6314bd69a8084aac50811edb282fec7a19a",
     "/runtime.94b424226ea4dd39.js": "d16fb526148c8ba637698ac8ac8d29b1a32523df",

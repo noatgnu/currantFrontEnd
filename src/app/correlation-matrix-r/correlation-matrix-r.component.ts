@@ -40,6 +40,24 @@ export class CorrelationMatrixRComponent {
   wsSub: Subscription = new Subscription()
 
   sessionID: string = ""
+  correlation_matrix_data: any[] = []
+  graphLayout: any = {
+    title: "Correlation Matrix",
+    xaxis: {
+      tickvals: [],
+      ticktext: []
+    },
+    yaxis: {
+      tickvals: [],
+      ticktext: []
+    },
+    height: 500, width: 500,
+    margin: {r: 50, l: 50, b: 50, t: 50},
+    font: {
+      family: "Arial, serif",
+    }
+  }
+
   constructor(
       private web: WebService,
       private fb: FormBuilder,
