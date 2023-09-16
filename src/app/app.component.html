@@ -1,41 +1,74 @@
-<mat-toolbar color="primary">
-  <div class="image-cropper">
-    <a routerLink="home">
-      <img src="assets/noatgnu_simple_logo_vector_graphic_of_segment_of_coral_180x180.png" class="coral-logo" alt="coral-logo">
-    </a>
-  </div>
-
-  <span>CORAL</span>
-  <span class="toolbar-spacer"></span>
-  <div>
-    <button mat-button *ngIf="!ws.eventStreamConnected" (click)="connectWebsocket()">
-      <mat-icon>refresh</mat-icon>
-      Connection lost
-    </button>
-    <button mat-button *ngIf="ws.eventStreamConnected">
-      <mat-icon>link</mat-icon>
-      Connection OK
-    </button>
-  </div>
-  <div>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu dropdown button">
-      <mat-icon>menu</mat-icon>
-    </button>
-  </div>
 
 
-</mat-toolbar>
+<mat-drawer-container class="sidebar-container">
+  <mat-drawer mode="over" #drawer position="end">
+    <div style="display: flex; justify-content: center; padding-top: 30px" >
+      <div class="image-cropper">
+        <img src="assets/noatgnu_simple_logo_vector_graphic_of_segment_of_coral_180x180.png" class="coral-logo" alt="coral-logo">
+      </div>
+    </div>
+    <mat-action-list>
+      <mat-list-item>
+        <mat-icon matListItemIcon color="accent">
+          folder
+        </mat-icon>
+        <div matListItemLine><span>Files</span></div>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListItemIcon color="accent">
+          note
+        </mat-icon>
+        <div matListItemLine><span>Tasks</span></div>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon matListItemIcon color="accent">
+          save
+        </mat-icon>
+        <div matListItemLine><span>Save Session</span></div>
+      </mat-list-item>
+    </mat-action-list>
+  </mat-drawer>
+  <mat-toolbar color="primary">
+<!--    <div>
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu dropdown button" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>-->
 
-<div style="display: flex; height: 100%; justify-content: space-between; align-content: stretch">
-  <div style="flex-grow: 2">
-    <router-outlet></router-outlet>
-  </div>
-  <div style="width: 300px">
-    <app-task-log></app-task-log>
-  </div>
-</div>
+    <div>
+      <span>CORAL</span>
+    </div>
 
-<mat-menu #menu="matMenu">
+
+    <span class="toolbar-spacer"></span>
+    <div>
+      <button mat-button *ngIf="!ws.eventStreamConnected" (click)="connectWebsocket()">
+        <mat-icon>refresh</mat-icon>
+        Connection lost
+      </button>
+      <button mat-button *ngIf="ws.eventStreamConnected">
+        <mat-icon>link</mat-icon>
+        Connection OK
+      </button>
+    </div>
+    <div>
+      <button mat-icon-button aria-label="Menu button" (click)="drawer.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <div style="display: flex; height: 100%; justify-content: space-between; align-content: stretch">
+    <div style="flex-grow: 2; padding-left: 20px">
+      <router-outlet></router-outlet>
+    </div>
+    <div style="width: 300px">
+      <app-task-log></app-task-log>
+    </div>
+  </div>
+</mat-drawer-container>
+
+<!--<mat-menu #menu="matMenu">
   <button mat-menu-item>
     <mat-icon>folder</mat-icon>
     <span>Files</span>
@@ -48,5 +81,5 @@
     <mat-icon>save</mat-icon>
     <span>Save Session</span>
   </button>
-</mat-menu>
+</mat-menu>-->
 

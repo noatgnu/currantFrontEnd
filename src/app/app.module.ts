@@ -32,6 +32,8 @@ import * as PlotlyJS from 'plotly.js-dist-min';
 import { SampleAndConditionAssignmentComponent } from './sample-and-condition-assignment/sample-and-condition-assignment.component';
 import { FileInputComponent } from './file-input/file-input.component';
 import { CorrelationMatrixRComponent } from './correlation-matrix-r/correlation-matrix-r.component';
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatListModule} from "@angular/material/list";
 
 PlotlyModule.plotlyjs = PlotlyJS
 
@@ -49,33 +51,35 @@ PlotlyModule.plotlyjs = PlotlyJS
     FileInputComponent,
     CorrelationMatrixRComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        ServiceWorkerModule.register('ngsw-worker.js', {
-            enabled: !isDevMode(),
-            // Register the ServiceWorker as soon as the application is stable
-            // or after 30 seconds (whichever comes first).
-            registrationStrategy: 'registerWhenStable:30000'
-        }),
-        BrowserAnimationsModule,
-        MatToolbarModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatCardModule,
-        HttpClientModule,
-        MatSelectModule,
-        ReactiveFormsModule,
-        FormsModule,
-        MatCheckboxModule,
-        MatGridListModule,
-        FileSaverDirective,
-        MatMenuModule,
-        NgOptimizedImage,
-        PlotlyModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: !isDevMode(),
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    }),
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    HttpClientModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatGridListModule,
+    FileSaverDirective,
+    MatMenuModule,
+    NgOptimizedImage,
+    PlotlyModule,
+    MatSidenavModule,
+    MatListModule
+  ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]
 })
